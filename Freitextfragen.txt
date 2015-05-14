@@ -1,0 +1,44 @@
+Freitextfragen Übung 3
+
+3. Array im Speicher
+
+
+   Variablen:
+   
+                dezimal hexadezimal    Little Endian Darstellung mit 4-Byte-Variablenlänge
+        a =     33      0x21           0x21 0x00 0x00 0x00 
+        b =     2       0x02           0x02 0x00 0x00 0x00
+        c =     7       0x07           0x07 0x00 0x00 0x00
+        
+   Speicher (niederwertiges Byte an niedrigerer Adresse):     
+   
+                             Niedrige Adressen                                                                      hohe Adressen
+        Adresse [Byte]       0       1       2       3       4       5       6       7       8       9       10       11       12
+        Little Endian        0x21    0x00    0x00    0x00 |  0x02    0x00    0x00    0x00 |  0x07    0x00    0x00     0x00 |          
+                                                                                           
+                                                                                           
+4. Hornerschema 
+
+Die Zahl der Multiplikationen wird durch das Hornerschema verringert und damit verringert sich auch der Rechenaufwand, die Anzahl der rechnerisch weniger aufwendigen Additionen bleibt gleich. 
+Bei der klassischen Schreibweise sind 2n-1 Multiplikationen (bei einem Polynom n-ter Ordnung) nötig, n-1 zur Bildung der Potenzen (ab a^2 bis a^n) und n Multiplikationen mit den Koeffizienten.
+Mit dem Hornerschema reduziert sich die Anzahl Multiplikationen auf n.
+Im Beispiel sind für das Polynom zweiter Ordnung klassich 3, mit dem Hornerschema nur 2 Multiplikationen nötig: ax^2+bx+c = c+x*(b+(x*a))
+
+
+5. Polynome der Form "for(i=0; i<N; i++) { a(i) * x^i}" berechnen
+
+Um den Rechenaufwand so klein wie möglich zu halten, sollte der Term in das Hornerschema überführt werden.
+Zur Berechnung der Summe müssen alle a(i) bekannt sein und die x^i sollten aufsteigend oder absteigend sortiert sein, um schnell auf die a(i) zugreifen zu können. 
+Falls x^i für ein i nicht in der Reihe enthalten ist, sei a(i) = 0. x sei zuvor fest gewählt.
+
+1. Zur Berechnung wird begonnen mit a(i) mit größtem i (also i = N, falls i von 0 bis N läuft), dieses a(i) wird mit x multipliziert. 
+2. Dann wird a(i) (mit i um 1 verringert) addiert.
+3. Danach wird der bisherige Ausdruck mit x multipliziert. 
+4. Und der Vorgang wird ab (2.) wiederholt, solange, bis i = 1, danach geht es weiter mit (5.).
+5. Multipliziere den bisherigen Ausdruck mit x.
+6. Addiere a(i=0).
+
+Das Ergebnis entspricht dem gesuchten Term. 
+
+
+
